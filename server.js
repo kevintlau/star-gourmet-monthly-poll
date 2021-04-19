@@ -12,7 +12,7 @@ require("dotenv").config();
 const indexRoutes = require("./routes/index");
 const contestRoutes = require("./routes/contests");
 const recipeRoutes = require("./routes/recipes");
-const userRoutes = require("./routes/users");
+const accountRoutes = require("./routes/accounts");
 
 // initialize express app
 const app = express();
@@ -25,16 +25,23 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(express.json());
-// TODO Add session middleware here
 
-// TODO Add passport middleware here
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 // mount route handlers
 app.use("/", indexRoutes);
 app.use("/", contestRoutes);
 app.use("/", recipeRoutes);
-app.use("/", userRoutes);
+app.use("/", accountRoutes);
 
 // tell app to listen on port 3000
 app.listen(port, () => {
