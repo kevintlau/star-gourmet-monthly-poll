@@ -5,7 +5,7 @@ const accountSchema = new Schema(
   {
     email: String,
     googleId: String,
-    submissions: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
+    recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
     votes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
   },
   {
