@@ -1,5 +1,64 @@
 <%- include("../partials/header") %>
 
-
+<form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= recipe.name %>" />
+  <label>Theme:</label>
+  <input type="text" name="cuisine" value="<%= recipe.cuisine %>" />
+  <label>Type:</label>
+  <select name="type">
+    <option 
+      value="Breakfast"
+      <%- (recipe.type === "Breakfast" ? "selected" : "") %>
+    >
+      Breakfast
+    </option>
+    <option
+      value="Smallplate"
+      <%- (recipe.type === "Smallplate" ? "selected" : "") %>
+    >
+      Smallplate
+    </option>
+    <option
+      value="Snack"
+      <%- (recipe.type === "Snack" ? "selected" : "") %>
+    >
+      Snack
+    </option>
+    <option
+      value="Appetizer"
+      <%- (recipe.type === "Appetizer" ? "selected" : "") %>
+    >
+      Appetizer
+    </option>
+    <option
+      value="Entree"
+      <%- (recipe.type === "Entree" ? "selected" : "") %>
+    >
+      Entree
+    </option>
+    <option
+      value="Side"
+      <%- (recipe.type === "Side" ? "selected" : "") %>
+    >
+      Side
+    </option>
+    <option
+      value="Dessert"
+      <%- (recipe.type === "Dessert" ? "selected" : "") %>
+    >
+      Dessert
+    </option>
+    <option
+      value="Beverage"
+      <%- (recipe.type === "Beverage" ? "selected" : "") %>
+    >
+      Beverage
+    </option>
+  </select>
+  <label>Ingredients:</label>
+  <input type="text" name="ingredients" value="<%= recipe.ingredients %>" />
+  <input type="submit" value="Update Recipe" />
+</form>
 
 <%- include("../partials/footer") %>

@@ -1,5 +1,24 @@
 <%- include("../partials/header") %>
 
-
+<form action="/recipes" method="POST">
+    <label for="name-input">Name:</label>
+    <input type="text" name="name" id="name-input">
+    <label for="theme-input">Theme:</label>
+    <input type="text" name="cuisine" id="theme-input">
+    <label for="type-input">Type:</label>
+    <select name="type" id="type-input">
+      <option value="Breakfast">Breakfast</option>
+      <option value="Smallplate">Smallplate</option>
+      <option value="Snack">Snack</option>
+      <option value="Appetizer">Appetizer</option>
+      <option value="Entree">Entree</option>
+      <option value="Side">Side</option>
+      <option value="Dessert">Dessert</option>
+      <option value="Beverage">Beverage</option>
+    </select>
+    <label for="ing-input">Ingredients:</label>
+    <input type="text" name="ingredients" id="ing-input">
+    <input type="submit" value="Submit Recipe">
+  </form>
 
 <%- include("../partials/footer") %>

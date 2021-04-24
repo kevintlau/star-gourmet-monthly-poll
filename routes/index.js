@@ -3,6 +3,8 @@ const passport = require("passport");
 
 router.get('/', (req, res) => {
   res.render('index', {
+    title: "Welcome",
+    header: "Current Contest",
     user: req.user,
   });
 });

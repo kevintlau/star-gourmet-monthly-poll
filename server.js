@@ -6,17 +6,15 @@ const passport = require("passport");
 const methodOverride = require("method-override");
 const port = process.env.PORT || 3000;
 
+// load environment .env variables
+require("dotenv").config();
 // connect to MongoDB and OAuth passport
 require("./config/database");
 require("./config/passport");
-// load environment .env variables
-require("dotenv").config();
 
 // load custom modules like router modules
 const indexRoutes = require("./routes/index");
-const contestRoutes = require("./routes/contests");
 const recipeRoutes = require("./routes/recipes");
-const accountRoutes = require("./routes/accounts");
 
 // initialize express app
 const app = express();
@@ -45,9 +43,7 @@ app.use(passport.session());
 
 // mount route handlers
 app.use("/", indexRoutes);
-app.use("/", contestRoutes);
 app.use("/", recipeRoutes);
-app.use("/", accountRoutes);
 
 // tell app to listen on port 3000
 app.listen(port, () => {

@@ -19,18 +19,19 @@ passport.use(
         // errors are passed to the next function (the cb)
         // this is called an escape hatch
         if (err) return cb(err);
-        // if student exists in db, then log them in
+        // if user exists in db, then log them in
         if (account) {
           return cb(null, account);
           // first argument is any errors that we encountered
           // in this case, it was a success, so error is "null"
         } else {
-          // student doesn't exist, create them instead
+          // user doesn't exist, create them instead
           const newAccount = new Account({
-            email: profile.email,
+            name: profile.displayName,
+            email: profile.emails[0].value,
             googleId: profile.id,
           });
-          newAccount.save((err) => {
+          newAccount.save(err => {
             // if error, then pass error to escape hatch
             if (err) return cb(err);
             return cb(null, newAccount);

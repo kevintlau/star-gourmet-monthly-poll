@@ -1,5 +1,39 @@
 <%- include("../partials/header") %>
 
+<!-- <a href="/recipes/new">Submit a Recipe</a> -->
+<form action="/recipes/new" method="get">
+    <button type="submit">Submit a Recipe</button>
+</form>
 
-
+<table id="list">
+  <thead>
+    <tr>
+      <th>Recipe</th>
+      <th>Contest / Theme</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% recipes.forEach(recipe => { %>
+      <tr>
+        <td><%= recipe.name %></td>
+        <td><%= recipe.cuisine %></td>
+        <td><%= recipe.type %></td>
+        <td>
+            <form action="/recipes/<%= recipe._id %>" method="get">
+                <button type="submit">Edit / Details</button>
+            </form>
+        </td>
+        <td>
+            <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  
 <%- include("../partials/footer") %>

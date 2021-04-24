@@ -4,21 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Materialize - Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Materialize - Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <title>Star Gourmet | Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Star Gourmet | <%= title %></title>
 </head>
 <body>
     <nav>
-        <!-- icon here -->
-        <!-- link to poll main page here -->
-        <!-- placeholder link to past contests here -->
-        <!-- link to my recipes here -->
-        <!-- link to login here -->
+        <div class="nav-wrapper teal">
+            <!-- icon here -->
+            <!-- link to poll main page here -->
+            <a href="/" class="left">Star Gourmet Monthly Poll</a>
+            <!-- placeholder link to past contests here -->
+            <ul class="right">
+                <!-- link to my recipes here -->
+                <li>
+                    <% if (user) { %>
+                        <a href="/recipes">My Recipes</a>
+                    <% } %>
+                </li>
+                <!-- link to login here -->
+                <li>
+                    <% if (user) { %>
+                      <a href="/logout">
+                        <i class="material-icons left">trending_flat</i>Logout
+                      </a>
+                    <% } else { %>
+                      <a href="/auth/google">
+                        <i class="material-icons left">vpn_key</i>Login with Google
+                      </a>
+                    <% } %>
+                </li>
+            </ul>
+        </div>
     </nav>
     <header>
-        <h1>Header here</h1>
+        <h1><%= header %></h1>
     </header>
     <main>
