@@ -1,24 +1,63 @@
 <%- include("../partials/header") %>
 
 <form action="/recipes" method="POST">
-    <label for="name-input">Name:</label>
-    <input type="text" name="name" id="name-input">
-    <label for="theme-input">Theme:</label>
-    <input type="text" name="cuisine" id="theme-input">
-    <label for="type-input">Type:</label>
-    <select name="type" id="type-input">
-      <option value="Breakfast">Breakfast</option>
-      <option value="Smallplate">Smallplate</option>
-      <option value="Snack">Snack</option>
-      <option value="Appetizer">Appetizer</option>
-      <option value="Entree">Entree</option>
-      <option value="Side">Side</option>
-      <option value="Dessert">Dessert</option>
-      <option value="Beverage">Beverage</option>
-    </select>
-    <label for="ing-input">Ingredients:</label>
-    <input type="text" name="ingredients" id="ing-input">
-    <input type="submit" value="Submit Recipe">
-  </form>
+  <label for="name-input">Recipe Name:</label>
+  <input type="text" name="name" id="name-input" required>
+  <label for="theme-input">Theme:</label>
+  <input type="text" name="cuisine" id="theme-input" value="<%= theme %>" disabled>
+  <label for="type-input">Type:</label>
+  <select name="type" id="type-input" required>
+    <option value="" selected disabled hidden>Select Type</option>
+    <option value="Breakfast">Breakfast</option>
+    <option value="Smallplate">Smallplate</option>
+    <option value="Snack">Snack</option>
+    <option value="Appetizer">Appetizer</option>
+    <option value="Entree">Entree</option>
+    <option value="Side">Side</option>
+    <option value="Dessert">Dessert</option>
+    <option value="Beverage">Beverage</option>
+  </select>
+  <label for="ing1-input">Ingredient 1 (required):</label>
+  <select name="ing1" id="ing1-input" required>
+    <option value="" selected disabled hidden>Select Ingredient 1</option>
+    <% for (category in ingredients) { %>
+      <option disabled><%= category %></option>
+      <% ingredients[category].forEach(ing => { %>
+        <option value="<%= ing %>"><%= ing %></option>
+      <% }); %>
+    <% } %>
+  </select>
+  <label for="ing2-input">Ingredient 2 (required):</label>
+  <select name="ing2" id="ing2-input" required>
+    <option value="" selected disabled hidden>Select Ingredient 2</option>
+    <% for (category in ingredients) { %>
+      <option disabled><%= category %></option>
+      <% ingredients[category].forEach(ing => { %>
+        <option value="<%= ing %>"><%= ing %></option>
+      <% }); %>
+    <% } %>
+  </select>
+  <label for="ing3-input">Ingredient 3:</label>
+  <select name="ing3" id="ing3-input">
+    <option value="" selected disabled hidden>Select Ingredient 3</option>
+    <% for (category in ingredients) { %>
+      <option disabled><%= category %></option>
+      <% ingredients[category].forEach(ing => { %>
+        <option value="<%= ing %>"><%= ing %></option>
+      <% }); %>
+    <% } %>
+  </select>
+  <label for="ing4-input">Ingredient 4:</label>
+  <select name="ing4" id="ing4-input">
+    <option value="" selected disabled hidden>Select Ingredient 4</option>
+    <% for (category in ingredients) { %>
+      <option disabled><%= category %></option>
+      <% ingredients[category].forEach(ing => { %>
+        <option value="<%= ing %>"><%= ing %></option>
+      <% }); %>
+    <% } %>
+  </select>
+  <input type="submit" value="Submit Recipe">
+</form>
 
 <%- include("../partials/footer") %>

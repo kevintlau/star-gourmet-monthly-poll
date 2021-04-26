@@ -1,3 +1,4 @@
+/*  Ingredients in Schema form
 const ingredients = [
     { name: "Fish", type: "meat" },
     { name: "Beef", type: "meat" },
@@ -26,14 +27,24 @@ const ingredients = [
     { name: "Butter", type: "dairy" },
     { name: "Yogurt", type: "dairy" },
 ];
+*/
+
+const ingredients = {
+  Meat: ["Beef", "Chicken", "Fish", "Pork"],
+  Seasoning: ["Herbs", "Garlic", "Peppercorn", "Sugar"],
+  Vegetables: ["Broccoli", "Carrot", "Celery", "Onion", "Tomato"],
+  Fruits: ["Apple", "Berries", "Orange", "Peach"],
+  Cereals: ["Beans", "Corn", "Flour", "Potato", "Rice"],
+  Dairy: ["Butter", "Cheese", "Milk", "Yogurt"],
+};
 
 const currentContest = {
-    name: "April 2021",
-    theme: "American",
-    startDate: "2021-04-01T00:00:00Z",
-    endDate: "2021-04-30T23:59:59Z",
-    recipes: [],
-    ingredients: [],
+  name: "April 2021",
+  theme: "American",
+  startDate: "2021-04-01T00:00:00Z",
+  endDate: "2021-04-30T23:59:59Z",
+  recipes: [],
+  ingredients: ingredients,
 };
 
 const mongoose = require("mongoose");
@@ -54,27 +65,8 @@ db.on("connected", function () {
   console.log(`Mongoose connected at ${db.host}:${db.port}`);
 });
 
-const Ingredient = require("../models/ingredient");
 const Contest = require("../models/contest");
 
-Ingredient.insertMany(ingredients, (err, ingredientDocs) => {
-    ingredientDocs.forEach(ingDoc => {
-        currentContest.ingredients.push(ingDoc._id);
-    });
-    console.log("currentContest: ", currentContest);
-    Contest.create(currentContest, (err, contest) => {
-        console.log("created contest: ", contest);
-    });
+Contest.create(currentContest, (err, contest) => {
+  console.log("created contest: ", contest);
 });
-
-// Ingredient.insertMany(ingredients, (err, ingredientDocs) => {
-//   Contest.create(currentContest, (err, contest) => {
-//     console.log("created contest: ", contest);
-//     ingredientDocs.forEach((ingDoc) => {
-//       contest.ingredients.push(ingDoc._id);
-//       contest.save((err) => {});
-//     });
-//   });
-
-//   console.log("currentContest: ", currentContest);
-// });

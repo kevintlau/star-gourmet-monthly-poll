@@ -8,7 +8,7 @@ const contestSchema = new Schema(
     startDate: Date,
     endDate: Date,
     recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
-    ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
+    ingredients: Object,
   },
   {
     timestamps: true,

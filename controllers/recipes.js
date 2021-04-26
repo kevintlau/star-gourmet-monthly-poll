@@ -14,30 +14,26 @@ const index = (req, res) => {
 };
 
 const newRecipe = (req, res) => {
-  res.render("recipes/new", {
-    title: "New Recipe Submission",
-    header: "Submit a Recipe for the Current Contest",
-    user: req.user,
-  });
-  //    let now = new Date();
-  //    let nowISO = now.toISOString();
-  //   Contest.findOne(
-  //     // search criteria: contest starts before now and ends after now
-  //     {
-  //       startDate: { $gte: ISODate(nowISO) },
-  //       endDate: { $lt: ISODate(nowISO) },
-  //     },
-  //     // callback: render the new page with the theme populated
-  //     (err, currentContest) => {
-  //       res.render("recipes/new", {
-  //         title: "New Recipe Submission",
-  //         header: "Submit a Recipe for the Current Contest",
-  //         user: req.user,
-  //         theme: currentContest.theme,
-  //         ingredients: currentContest.ingredients,
-  //       });
-  //     }
-  //   );
+  let now = new Date();
+  let nowISO = now.toISOString();
+  Contest.findOne(
+    // search criteria: contest starts before now and ends after now
+    {
+      startDate: { $lt: nowISO },
+      endDate: { $gte: nowISO },
+    },
+    // callback: render the new page with the theme populated
+    (err, currContest) => {
+      console.log(currContest.ingredients);
+      res.render("recipes/new", {
+        title: "New Recipe Submission",
+        header: `Submit a Recipe - ${currContest.name}: ${currContest.theme}`,
+        user: req.user,
+        theme: currContest.theme,
+        ingredients: currContest.ingredients,
+      });
+    }
+  );
 };
 
 const show = (req, res) => {
@@ -55,6 +51,13 @@ const create = (req, res) => {
   req.body.creator = req.user._id;
   req.body.accountsVoted = [req.user._id];
   req.body.score = 1;
+  // clean up ingredients in new recipe and put into single array
+  let ingArr = ["ing1", "ing2", "ing3", "ing4"];
+  req.body.ingredients = [];
+  ingArr.forEach(ingIndex => {
+    if (req.body[ingIndex]) req.body.ingredients.push(req.body[ingIndex]);
+    delete req.body[ingIndex];
+  });
   Recipe.create(req.body, (err, recipe) => {
     if (err) return res.redirect("recipes/new");
     req.user.recipes.push(recipe._id);
@@ -67,20 +70,24 @@ const create = (req, res) => {
 };
 
 const update = (req, res) => {
-  Recipe.findByIdAndUpdate(req.params.id, {
-    name: req.body.name,
-    cuisine: req.body.cuisine,
-    type: req.body.type,
-    ingredients: req.body.ingredients,
-  }, err => {
-    res.redirect("/recipes");
-  });
+  Recipe.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+      cuisine: req.body.cuisine,
+      type: req.body.type,
+      ingredients: req.body.ingredients,
+    },
+    (err) => {
+      res.redirect("/recipes");
+    }
+  );
 };
 
 const deleteRecipe = (req, res) => {
   Recipe.findByIdAndDelete(req.params.id, (err) => {
     req.user.recipes.pull(req.params.id);
-    req.user.save(err => {
+    req.user.save((err) => {
       res.redirect("/recipes");
     });
   });

@@ -7,7 +7,7 @@ const recipeSchema = new Schema(
     cuisine: String,
     type: String,
     // contest: { type: Schema.Types.ObjectId, ref: "Contest" },
-    ingredients: String,
+    ingredients: [String],
     // ingedients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
     creator: { type: Schema.Types.ObjectId, ref: "Account" },
     accountsVoted: [{ type: Schema.Types.ObjectId, ref: "Account" }],
