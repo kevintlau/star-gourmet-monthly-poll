@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const recipeSchema = new Schema(
   {
     name: String,
+    contest: { type: Schema.Types.ObjectId, ref: "Contest" },
     cuisine: String,
     type: String,
     // contest: { type: Schema.Types.ObjectId, ref: "Contest" },

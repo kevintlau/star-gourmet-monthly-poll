@@ -1,5 +1,4 @@
 const Recipe = require("../models/recipe");
-const Account = require("../models/account");
 const Contest = require("../models/contest");
 
 const index = (req, res) => {
@@ -29,6 +28,7 @@ const newRecipe = (req, res) => {
         title: "New Recipe Submission",
         header: `Submit a Recipe - ${currContest.name}: ${currContest.theme}`,
         user: req.user,
+        contestId: currContest._id,
         theme: currContest.theme,
         ingredients: currContest.ingredients,
       });
@@ -38,16 +38,20 @@ const newRecipe = (req, res) => {
 
 const show = (req, res) => {
   Recipe.findById(req.params.id, (err, recipe) => {
-    res.render("recipes/edit", {
-      title: "Recipe Details",
-      header: "Recipe Details",
-      user: req.user,
-      recipe,
-    });
+    Contest.findById(recipe.contest, (err, contest) => {
+      res.render("recipes/edit", {
+        title: "Recipe Details",
+        header: "Recipe Details",
+        user: req.user,
+        recipe,
+        ingredients: contest.ingredients,
+      });
+    })
   });
 };
 
 const create = (req, res) => {
+  // link creator to recipe, and creator automatically votes for recipe
   req.body.creator = req.user._id;
   req.body.accountsVoted = [req.user._id];
   req.body.score = 1;
@@ -58,8 +62,10 @@ const create = (req, res) => {
     if (req.body[ingIndex]) req.body.ingredients.push(req.body[ingIndex]);
     delete req.body[ingIndex];
   });
+  // now create the recipe with the name, contestId, theme, type, and ingreds
   Recipe.create(req.body, (err, recipe) => {
     if (err) return res.redirect("recipes/new");
+    // link recipe to the creator and count the vote in the creator's votes list
     req.user.recipes.push(recipe._id);
     req.user.votes.push(recipe._id);
     req.user.save((err) => {

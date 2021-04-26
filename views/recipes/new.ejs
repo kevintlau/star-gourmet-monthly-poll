@@ -2,9 +2,13 @@
 
 <form action="/recipes" method="POST">
   <label for="name-input">Recipe Name:</label>
-  <input type="text" name="name" id="name-input" required>
-  <label for="theme-input">Theme:</label>
-  <input type="text" name="cuisine" id="theme-input" value="<%= theme %>" disabled>
+  <input type="text" name="name" id="name-input" required />
+  <!-- show theme of the contest but don't allow user to change it -->
+  <label>Theme:</label>
+  <input type="text" value="<%= theme %>" disabled />
+  <!-- load in the contest ID and the theme into req.body -->
+  <input type="hidden" name="contest" value="<%= contestId %>" />
+  <input type="hidden" name="cuisine" value="<%= theme %>" />
   <label for="type-input">Type:</label>
   <select name="type" id="type-input" required>
     <option value="" selected disabled hidden>Select Type</option>
@@ -57,7 +61,7 @@
       <% }); %>
     <% } %>
   </select>
-  <input type="submit" value="Submit Recipe">
+  <input type="submit" value="Submit Recipe" />
 </form>
 
 <%- include("../partials/footer") %>
