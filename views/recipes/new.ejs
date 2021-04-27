@@ -6,9 +6,10 @@
   <!-- show theme of the contest but don't allow user to change it -->
   <label>Theme:</label>
   <input type="text" value="<%= theme %>" disabled />
-  <!-- load in the contest ID and the theme into req.body -->
+  <!-- load in the contest ID, name, and theme into req.body -->
   <input type="hidden" name="contest" value="<%= contestId %>" />
   <input type="hidden" name="cuisine" value="<%= theme %>" />
+  <input type="hidden" name="contestName" value="<%= contestName %>" />
   <label for="type-input">Type:</label>
   <select name="type" id="type-input" required>
     <option value="" selected disabled hidden>Select Type</option>

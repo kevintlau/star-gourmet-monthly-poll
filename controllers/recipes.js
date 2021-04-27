@@ -29,6 +29,7 @@ const newRecipe = (req, res) => {
         header: `Submit a Recipe - ${currContest.name}: ${currContest.theme}`,
         user: req.user,
         contestId: currContest._id,
+        contestName: currContest.name,
         theme: currContest.theme,
         ingredients: currContest.ingredients,
       });

@@ -5,6 +5,7 @@ const recipeSchema = new Schema(
   {
     name: String,
     contest: { type: Schema.Types.ObjectId, ref: "Contest" },
+    contestName: String,
     cuisine: String,
     type: String,
     // contest: { type: Schema.Types.ObjectId, ref: "Contest" },

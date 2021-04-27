@@ -9,7 +9,8 @@
   <thead>
     <tr>
       <th>Recipe</th>
-      <th>Contest / Theme</th>
+      <th>Contest</th>
+      <th>Cuisine</th>
       <th>Type</th>
       <th></th>
       <th></th>
@@ -19,6 +20,7 @@
     <% recipes.forEach(recipe => { %>
       <tr>
         <td><%= recipe.name %></td>
+        <td><%= recipe.contestName %></td>
         <td><%= recipe.cuisine %></td>
         <td><%= recipe.type %></td>
         <td>
