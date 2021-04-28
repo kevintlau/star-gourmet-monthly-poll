@@ -100,6 +100,12 @@ const deleteRecipe = (req, res) => {
   });
 };
 
+const list = (req, res) => {
+  Recipe.find({}, (err, recipes) => {
+    return res.json(recipes);
+  });
+}
+
 module.exports = {
   index,
   new: newRecipe,
@@ -107,4 +113,5 @@ module.exports = {
   create,
   update,
   delete: deleteRecipe,
+  list,
 };

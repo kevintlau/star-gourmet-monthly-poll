@@ -11,7 +11,7 @@ A companion web application that allows users to vote on recipes to be included 
 * Express
 * MongoDB (w/ Mongoose)
 * OAuth (w/ Google login)
-* Materialize
+* Bootstrap
 
 ### Screenshots
 
@@ -32,3 +32,7 @@ Click the cards to show details on the recipes, and filter recipes shown through
 ### Future Enhancements
 
 WIP
+
+### References
+
+Dennis Ivy: "Front-End Pagination With JavaScript" - https://www.youtube.com/watch?v=mslD-bpvjiU

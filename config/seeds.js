@@ -66,6 +66,7 @@ db.on("connected", function () {
 });
 
 const Contest = require("../models/contest");
+const Recipe = require("../models/recipe");
 
 Contest.create(currentContest, (err, contest) => {
   console.log("created contest: ", contest);
