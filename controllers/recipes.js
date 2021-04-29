@@ -23,7 +23,6 @@ const newRecipe = (req, res) => {
     },
     // callback: render the new page with the theme populated
     (err, currContest) => {
-      console.log(currContest.ingredients);
       res.render("recipes/new", {
         title: "New Recipe Submission",
         header: `Submit a Recipe - ${currContest.name}: ${currContest.theme}`,
@@ -47,7 +46,7 @@ const show = (req, res) => {
         recipe,
         ingredients: contest.ingredients,
       });
-    })
+    });
   });
 };
 
@@ -57,7 +56,7 @@ const create = (req, res) => {
   req.body.accountsVoted = [req.user._id];
   req.body.score = 1;
   // clean up ingredients in new recipe and put into single array
-  let ingArr = ["ing1", "ing2", "ing3", "ing4"];
+  const ingArr = ["ing1", "ing2", "ing3", "ing4"];
   req.body.ingredients = [];
   ingArr.forEach(ingIndex => {
     if (req.body[ingIndex]) req.body.ingredients.push(req.body[ingIndex]);
@@ -77,13 +76,21 @@ const create = (req, res) => {
 };
 
 const update = (req, res) => {
+  // clean up ingredients in new recipe and put into single array
+  console.log(req.body);
+  const ingArr = ["ing1", "ing2", "ing3", "ing4"];
+  const ingredients = [];
+  ingArr.forEach(ingIndex => {
+    if (req.body[ingIndex]) ingredients.push(req.body[ingIndex]);
+  });
+  console.log(ingredients);
   Recipe.findByIdAndUpdate(
     req.params.id,
     {
       name: req.body.name,
       cuisine: req.body.cuisine,
       type: req.body.type,
-      ingredients: req.body.ingredients,
+      ingredients,
     },
     (err) => {
       res.redirect("/recipes");
@@ -100,12 +107,6 @@ const deleteRecipe = (req, res) => {
   });
 };
 
-const list = (req, res) => {
-  Recipe.find({}, (err, recipes) => {
-    return res.json(recipes);
-  });
-}
-
 module.exports = {
   index,
   new: newRecipe,
@@ -113,5 +114,4 @@ module.exports = {
   create,
   update,
   delete: deleteRecipe,
-  list,
 };

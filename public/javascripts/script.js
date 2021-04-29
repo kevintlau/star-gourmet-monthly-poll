@@ -57,7 +57,6 @@ function paginate() {
 function generatePageButtons() {
   $pageBtnWrapperEl.empty();
   let pageButtonWindow = calculateButtonWindow();
-  console.log(pageButtonWindow);
   let btnsHtml = "";
   // create a "First" button as the first button if the current page is not 1
   if (currentPage != 1) {
@@ -66,7 +65,7 @@ function generatePageButtons() {
         &#171; First
       </button>
     `;
-  };
+  }
   // fill the numerical buttons around the current page
   for (let i = pageButtonWindow[0]; i <= pageButtonWindow[1]; i++) {
     btnsHtml += `
@@ -74,7 +73,7 @@ function generatePageButtons() {
         ${i}
       </button>
     `;
-  };
+  }
   // create a "Last" button as the last button if the current page is not last
   if (currentPage != numOfPages) {
     btnsHtml += `
@@ -82,7 +81,7 @@ function generatePageButtons() {
         Last &#187;
       </button>
     `;
-  };
+  }
   $pageBtnWrapperEl.append(btnsHtml);
 }
 
@@ -102,7 +101,6 @@ function calculateButtonWindow() {
     // special case: if window is too big, then hardcode 1 as maxLeft
     if (maxLeft < 1) maxLeft = 1;
   }
-  console.log("calculateButtonWindow result: ", [maxLeft, maxRight]);
   return [maxLeft, maxRight];
 }
 

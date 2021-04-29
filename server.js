@@ -15,6 +15,7 @@ require("./config/passport");
 // load custom modules like router modules
 const indexRoutes = require("./routes/index");
 const recipeRoutes = require("./routes/recipes");
+const recipesApiRouter = require("./routes/api/recipes");
 
 // initialize express app
 const app = express();
@@ -44,6 +45,7 @@ app.use(passport.session());
 // mount route handlers
 app.use("/", indexRoutes);
 app.use("/", recipeRoutes);
+app.use("/api/recipes", recipesApiRouter);
 
 // tell app to listen on port 3000
 app.listen(port, () => {

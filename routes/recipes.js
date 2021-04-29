@@ -15,7 +15,5 @@ router.get("/recipes/:id", isLoggedIn, recipesCtrl.show);
 router.post("/recipes", isLoggedIn, recipesCtrl.create);
 router.put("/recipes/:id", isLoggedIn, recipesCtrl.update);
 router.delete("/recipes/:id", isLoggedIn, recipesCtrl.delete);
-// recipe api for contest show
-router.get("/api/recipes", recipesCtrl.list);
 
 module.exports = router;
