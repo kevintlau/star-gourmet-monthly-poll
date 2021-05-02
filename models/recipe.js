@@ -8,6 +8,7 @@ const recipeSchema = new Schema(
     contestName: String,
     cuisine: String,
     type: String,
+    image: String,
     // contest: { type: Schema.Types.ObjectId, ref: "Contest" },
     ingredients: [String],
     // ingedients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
