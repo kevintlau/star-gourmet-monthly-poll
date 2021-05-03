@@ -20,13 +20,11 @@ let numOfPages;
 
 $recipesWrapperEl = $("#recipes-wrapper");
 $pageBtnWrapperEl = $("#page-btn-wrapper");
-$pageBtnEl = $("button.page-btn");
-$voteBtnEl = $("button.vote");
 
 // ------- event listeners ----------------------------------------------------
 
 $pageBtnWrapperEl.on("click", ".page-link", handleChangePage);
-$voteBtnEl.on("click", handleVote);
+$recipesWrapperEl.on("click", ".vote-btn", handleVote);
 
 // ------- functions ----------------------------------------------------------
 
@@ -149,6 +147,7 @@ function generateCard(recipeObj) {
 
 function render() {
   paginate();
+  $recipesWrapperEl.empty();
   let resultsHtml = pagedResults.map((recipe) => {
     return generateCard(recipe);
   });
@@ -157,12 +156,15 @@ function render() {
 }
 
 function handleChangePage() {
-  $recipesWrapperEl.empty();
   currentPage = Number($(this).val());
   render();
 }
 
 //
 function handleVote() {
-  $.post("/api/recipes/:id/vote");
+  let recipeId = this.dataset.id;
+  $.post(`/api/recipes/${recipeId}/vote`).then(
+    () => render(),
+    err => console.log(err)
+  );
 }
