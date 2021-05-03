@@ -30,9 +30,9 @@ h1, h2, h3 {
 }
 
 :root {
-    --main-color: #AF9DEB;
+    --main-color: #af9debd3;
     --secondary-color: #75EB7C;
-    --tertiary-color: #ebae78;
+    --tertiary-color: #ebae78cb;
     --main-color-dark: #57419E;
     --secondary-color-dark: #6C9E6E;
 }
@@ -65,7 +65,46 @@ main {
 }
 
 .btn-custom-main {
+    color: #000;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.btn-custom-main:hover {
     color: #fff;
     background-color: var(--main-color-dark);
     border-color: var(--main-color-dark);
+}
+
+.btn-custom-main:focus {
+    color: #fff;
+    background-color: var(--main-color-dark);
+    border-color: var(--main-color-dark);
+    box-shadow: 0 0 0 0.25rem var(--main-color);
+}
+
+.btn-custom-secondary {
+    color: #000;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-custom-secondary:hover {
+    color: #fff;
+    background-color: var(--secondary-color-dark);
+    border-color: var(--secondary-color-dark);
+}
+
+.btn-custom-secondary:focus {
+    color: #fff;
+    background-color: var(--secondary-color-dark);
+    border-color: var(--secondary-color-dark);
+    box-shadow: 0 0 0 0.25rem var(--secondary-color);
+}
+
+.recipe-img {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center center;
 }

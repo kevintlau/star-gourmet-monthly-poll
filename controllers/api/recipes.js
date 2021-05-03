@@ -1,9 +1,19 @@
 const Recipe = require("../../models/recipe");
+const Account = require("../../models/account");
 
-const index = (req, res) => {
-  Recipe.find({}, (err, recipes) => {
-    res.status(200).json(recipes);
-  });
+const index = async(req, res) => {
+  const results = []; 
+  const recipes = await Recipe.find({});
+
+  for (let i = 0; i < recipes.length; i++) {
+    
+    const creator = await Account.findById(recipes[i].creator);
+    let submitter = creator.name;
+
+    results.push({...recipes[i]._doc, submitter});
+  };
+  
+  res.status(200).json(results);
 };
 
 const show = (req, res) => {

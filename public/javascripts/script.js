@@ -25,7 +25,7 @@ $voteBtnEl = $("button.vote");
 
 // ------- event listeners ----------------------------------------------------
 
-$pageBtnWrapperEl.on("click", ".page-btn", handleChangePage);
+$pageBtnWrapperEl.on("click", ".page-link", handleChangePage);
 $voteBtnEl.on("click", handleVote);
 
 // ------- functions ----------------------------------------------------------
@@ -61,25 +61,31 @@ function generatePageButtons() {
   // create a "First" button as the first button if the current page is not 1
   if (currentPage != 1) {
     btnsHtml += `
-      <button value=${1} class="page-btn btn btn-sm btn-info">
-        &#171; First
-      </button>
+      <li class="page-item">
+        <button value=${1} class="page-link">
+          &#171; First
+        </button>
+      </li>
     `;
   }
   // fill the numerical buttons around the current page
   for (let i = pageButtonWindow[0]; i <= pageButtonWindow[1]; i++) {
     btnsHtml += `
-      <button value=${i} class="page-btn btn btn-sm btn-info">
-        ${i}
-      </button>
+      <li class="page-item">
+        <button value=${i} class="page-link">
+          ${i}
+        </button>
+      </li>
     `;
   }
   // create a "Last" button as the last button if the current page is not last
   if (currentPage != numOfPages) {
     btnsHtml += `
-      <button value=${numOfPages} class="page-btn btn btn-sm btn-info">
-        Last &#187;
-      </button>
+      <li class="page-item">
+        <button value=${numOfPages} class="page-link">
+          Last &#187;
+        </button>
+      </li>  
     `;
   }
   $pageBtnWrapperEl.append(btnsHtml);
@@ -104,14 +110,47 @@ function calculateButtonWindow() {
   return [maxLeft, maxRight];
 }
 
+function generateCard(recipeObj) {
+  return `
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">${recipeObj.name}</h5>
+        </div>
+        <div 
+          class="recipe-img"
+          style="background-image: url('${recipeObj.image}')"
+        ></div>
+        <div class="card-body container">
+          <p class="card-text">Submitter: ${recipeObj.submitter}</p>
+          <div class="row justify-content-evenly text-center">
+            <div class="col">
+              <button 
+                class="btn btn-custom-main details-btn mb-1 mb-md-0"
+                data-id="${recipeObj._id}"
+              >
+                Details
+              </button>
+            </div>
+            <div class="col">
+              <button 
+                class="btn btn-custom-secondary vote-btn"
+                data-id="${recipeObj._id}"
+              >
+                Vote: ${recipeObj.score}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function render() {
   paginate();
   let resultsHtml = pagedResults.map((recipe) => {
-    return `
-      <article class="recipe">
-        <h3>${recipe.name}</h3>
-      </article>
-    `;
+    return generateCard(recipe);
   });
   $recipesWrapperEl.append(resultsHtml);
   generatePageButtons();

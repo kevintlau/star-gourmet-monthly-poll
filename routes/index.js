@@ -1,13 +1,8 @@
 const router = require('express').Router();
+const contestsCtrl = require("../controllers/contests");
 const passport = require("passport");
 
-router.get('/', (req, res) => {
-  res.render('index', {
-    title: "Welcome",
-    header: "Current Contest",
-    user: req.user,
-  });
-});
+router.get('/', contestsCtrl.index);
 
 // login route
 router.get("/auth/google", passport.authenticate("google", {

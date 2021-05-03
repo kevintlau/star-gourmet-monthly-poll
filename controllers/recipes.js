@@ -25,7 +25,7 @@ const newRecipe = (req, res) => {
     (err, currContest) => {
       res.render("recipes/new", {
         title: "New Recipe Submission",
-        header: `Submit a Recipe - ${currContest.name}`,
+        header: `Submit a Recipe: ${currContest.name}`,
         user: req.user,
         contestId: currContest._id,
         contestName: currContest.name,
