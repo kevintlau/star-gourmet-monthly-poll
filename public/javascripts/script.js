@@ -56,36 +56,32 @@ function generatePageButtons() {
   $pageBtnWrapperEl.empty();
   let pageButtonWindow = calculateButtonWindow();
   let btnsHtml = "";
-  // create a "First" button as the first button if the current page is not 1
-  if (currentPage != 1) {
-    btnsHtml += `
-      <li class="page-item">
-        <button value=${1} class="page-link">
-          &#171; First
-        </button>
-      </li>
-    `;
-  }
+  // create a "First" button that is disabled if we are page 1
+  btnsHtml += `
+    <li class="page-item ${(currentPage == 1) ? "disabled" : ""}">
+      <button value=${1} class="page-link">
+        &#171; First
+      </button>
+    </li>
+  `;
   // fill the numerical buttons around the current page
   for (let i = pageButtonWindow[0]; i <= pageButtonWindow[1]; i++) {
     btnsHtml += `
-      <li class="page-item">
+      <li class="page-item ${(currentPage == i) ? "active" : ""}">
         <button value=${i} class="page-link">
           ${i}
         </button>
       </li>
     `;
   }
-  // create a "Last" button as the last button if the current page is not last
-  if (currentPage != numOfPages) {
-    btnsHtml += `
-      <li class="page-item">
-        <button value=${numOfPages} class="page-link">
-          Last &#187;
-        </button>
-      </li>  
-    `;
-  }
+  // create a "Last" button that is disabled if we are on the last page
+  btnsHtml += `
+    <li class="page-item ${(currentPage == numOfPages) ? "disabled" : ""}">
+      <button value=${numOfPages} class="page-link">
+        Last &#187;
+      </button>
+    </li>  
+  `;
   $pageBtnWrapperEl.append(btnsHtml);
 }
 

@@ -1,6 +1,6 @@
 # Star Gourmet - Monthly Poll
 
-A companion web application that allows users to vote on recipes to be included in the monthly game update.
+A companion web application that allows users to create and vote on recipes to be included in the monthly game update.
 
 ### Technologies Used
 
@@ -17,7 +17,11 @@ A companion web application that allows users to vote on recipes to be included 
 
 Desktop functionality:
 
-WIP
+![Landing Page](https://i.imgur.com/e4eBVOy.png)
+
+![My Recipes Page](https://i.imgur.com/pHcQt2X.png)
+
+![Recipe Show Page](https://i.imgur.com/nOrbLVc.png)
 
 Wireframe
 
@@ -25,13 +29,16 @@ Wireframe
 
 ### Getting Started
 
-Click [WIP](#) to visit the page for the current contest!
+Click [here](https://star-gourmet-monthly-poll.herokuapp.com/) to visit app!
 
-Click the cards to show details on the recipes, and filter recipes shown through the search filters. You can also log in to submit recipes and view the ones you have already submitted.
+Browse the current submissions in the contest on the main page. If you're up for it, log in through Google, and submit and edit your own recipes!
 
 ### Future Enhancements
 
-WIP
+* Add a details modal to the contest page
+* Add a page for previous contests
+* Add an About page to introduce the app
+* Add a real-time redirect when users vote on a recipe
 
 ### References
 
