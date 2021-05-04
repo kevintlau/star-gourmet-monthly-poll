@@ -42,5 +42,5 @@ Browse the current submissions in the contest on the main page. If you're up for
 
 ### References
 
-Dennis Ivy: "Front-End Pagination With JavaScript" - https://www.youtube.com/watch?v=mslD-bpvjiU
-Loading spinner sourced from Loading.io: https://loading.io/spinner/spin/-spinner-ball-circle-rotate-rosary-loader-ajax
+* Dennis Ivy: "Front-End Pagination With JavaScript" - https://www.youtube.com/watch?v=mslD-bpvjiU
+* Loading spinner sourced from Loading.io: https://loading.io/spinner/spin/-spinner-ball-circle-rotate-rosary-loader-ajax
