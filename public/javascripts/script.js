@@ -18,8 +18,9 @@ let numOfPages;
 
 // ------- cached element references ------------------------------------------
 
-$recipesWrapperEl = $("#recipes-wrapper");
-$pageBtnWrapperEl = $("#page-btn-wrapper");
+const $spinnerEl = $("#spinner");
+const $recipesWrapperEl = $("#recipes-wrapper");
+const $pageBtnWrapperEl = $("#page-btn-wrapper");
 
 // ------- event listeners ----------------------------------------------------
 
@@ -34,6 +35,7 @@ init();
 function init() {
   $.get("/api/recipes").then(
     (data) => {
+      $spinnerEl.hide();
       fullResults = data;
       render();
     },
@@ -128,10 +130,11 @@ function generateCard(recipeObj) {
             </div>
             <div class="col">
               <button 
-                class="btn btn-custom-secondary vote-btn"
+                class="btn btn-custom-secondary vote-btn
+                  ${!recipeObj.votable ? 'disabled' : ''}"
                 data-id="${recipeObj._id}"
               >
-                Vote: ${recipeObj.score}
+                Vote: <span class="score">${recipeObj.score}<span>
               </button>
             </div>
           </div>
@@ -158,9 +161,14 @@ function handleChangePage() {
 
 //
 function handleVote() {
+  $(this).addClass("disabled");
+  let $scoreEl = $($(this)[0].children[0]);
+  let currentScore = parseInt($scoreEl.text());
+  currentScore++;
+  $scoreEl.text(currentScore);
   let recipeId = this.dataset.id;
   $.post(`/api/recipes/${recipeId}/vote`).then(
-    () => render(),
+    () => {},
     err => console.log(err)
   );
 }

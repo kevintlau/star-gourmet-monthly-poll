@@ -9,7 +9,13 @@ const index = async (req, res) => {
     const creator = await Account.findById(recipes[i].creator);
     let submitter = creator.name;
 
-    results.push({ ...recipes[i]._doc, submitter });
+
+
+    results.push({ 
+      ...recipes[i]._doc, 
+      submitter, 
+      votable: req.user && !recipes[i].accountsVoted.includes(req.user._id),
+    });
   }
 
   res.json(results);
