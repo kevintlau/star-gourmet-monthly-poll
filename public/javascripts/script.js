@@ -128,7 +128,7 @@ function generateCard(recipeObj) {
           <div class="row justify-content-evenly text-center">
             <div class="col">
               <button 
-                class="btn btn-custom-main details-btn mb-1 mb-md-0"
+                class="btn btn-custom-main details-btn mb-1 mb-md-0 disabled"
                 data-id="${recipeObj._id}"
               >
                 Details
