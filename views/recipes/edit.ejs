@@ -82,9 +82,15 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-4">
-        <label for="ing1-input" class="form-label mt-2">Ingredient 1 (required):</label>
+        <label for="ing1-input" class="form-label mt-2">
+          Ingredient 1 (required):
+        </label>
         <select class="form-select" name="ing1" id="ing1-input" required>
-          <option value="" selected disabled hidden>Select Ingredient 1</option>
+          <!-- placeholder before user selects an ingredient -->
+          <option value="" selected disabled hidden>
+            Select Ingredient 1
+          </option>
+          <!-- load ingredients -->
           <% for (category in ingredients) { %>
             <optgroup label="<%= category %>">
             <% ingredients[category].forEach(ing => { %>
@@ -99,9 +105,15 @@
         </select>
       </div>
       <div class="col-4">
-        <label for="ing2-input" class="form-label mt-2">Ingredient 2 (required):</label>
+        <label for="ing2-input" class="form-label mt-2">
+          Ingredient 2 (required):
+        </label>
         <select class="form-select" name="ing2" id="ing2-input" required>
-          <option value="" selected disabled hidden>Select Ingredient 2</option>
+          <!-- placeholder before user selects an ingredient -->
+          <option value="" selected disabled hidden>
+            Select Ingredient 2
+          </option>
+          <!-- load ingredients -->
           <% for (category in ingredients) { %>
             <optgroup label="<%= category %>">
             <% ingredients[category].forEach(ing => { %>
@@ -118,9 +130,15 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-4">
-        <label for="ing3-input" class="form-label mt-2">Ingredient 3:</label>
+        <label for="ing3-input" class="form-label mt-2">
+          Ingredient 3:
+        </label>
         <select class="form-select" name="ing3" id="ing3-input">
-          <option value="" selected disabled hidden>Select Ingredient 3</option>
+          <!-- placeholder before user selects an ingredient -->
+          <option value="" selected disabled hidden>
+            Select Ingredient 3
+          </option>
+          <!-- load ingredients -->
           <% for (category in ingredients) { %>
             <optgroup label="<%= category %>">
             <% ingredients[category].forEach(ing => { %>
@@ -137,7 +155,11 @@
       <div class="col-4">
         <label for="ing4-input" class="form-label mt-2">Ingredient 4:</label>
         <select class="form-select" name="ing4" id="ing4-input">
-          <option value="" selected disabled hidden>Select Ingredient 4</option>
+          <!-- placeholder before user selects an ingredient -->
+          <option value="" selected disabled hidden>
+            Select Ingredient 4
+          </option>
+          <!-- load ingredients -->
           <% for (category in ingredients) { %>
             <optgroup label="<%= category %>">
             <% ingredients[category].forEach(ing => { %>

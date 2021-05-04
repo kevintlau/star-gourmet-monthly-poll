@@ -35,14 +35,22 @@
               </a>
           </td>
           <td class="text-center">
-              <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="post">
-                  <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+              <form 
+                action="/recipes/<%= recipe._id %>?_method=DELETE" 
+                method="post"
+              >
+                <button class="btn btn-sm btn-danger" type="submit">
+                  Delete
+                </button>
               </form>
           </td>
         </tr>
       <% }); %>
     </tbody>
   </table>
+  <p>
+    <%= recipes.length === 0 ? "You haven't submitted any recipes yet!" : "" %>
+  </p>
 </div>
   
 <%- include("../partials/footer") %>

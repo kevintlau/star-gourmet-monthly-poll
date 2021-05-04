@@ -8,11 +8,12 @@ const recipeSchema = new Schema(
     contestName: String,
     cuisine: String,
     type: String,
+    // URL to an image of the food
     image: String,
-    // contest: { type: Schema.Types.ObjectId, ref: "Contest" },
+    // store ingredients as a string - no need to overengineer and make a model
     ingredients: [String],
-    // ingedients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
     creator: { type: Schema.Types.ObjectId, ref: "Account" },
+    // list of users who have voted for the recipe
     accountsVoted: [{ type: Schema.Types.ObjectId, ref: "Account" }],
     score: Number,
   },

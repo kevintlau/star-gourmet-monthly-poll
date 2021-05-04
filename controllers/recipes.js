@@ -13,6 +13,7 @@ const index = (req, res) => {
 };
 
 const newRecipe = (req, res) => {
+  // find the current contest based on current date/time
   let now = new Date();
   let nowISO = now.toISOString();
   Contest.findOne(
@@ -21,7 +22,7 @@ const newRecipe = (req, res) => {
       startDate: { $lt: nowISO },
       endDate: { $gte: nowISO },
     },
-    // callback: render the new page with the theme populated
+    // callback: render the "new" page with current contest populated
     (err, currContest) => {
       res.render("recipes/new", {
         title: "New Recipe Submission",
@@ -30,12 +31,14 @@ const newRecipe = (req, res) => {
         contestId: currContest._id,
         contestName: currContest.name,
         theme: currContest.theme,
+        // each contest has a list of ingredients, so we need to pass those in
         ingredients: currContest.ingredients,
       });
     }
   );
 };
 
+// show and edit functions are on the same page
 const show = (req, res) => {
   Recipe.findById(req.params.id, (err, recipe) => {
     Contest.findById(recipe.contest, (err, contest) => {
@@ -65,7 +68,7 @@ const create = (req, res) => {
   // now create the recipe with the name, contestId, theme, type, and ingreds
   Recipe.create(req.body, (err, recipe) => {
     if (err) return res.redirect("recipes/new");
-    // link recipe to the creator and count the vote in the creator's votes list
+    // after recipe is created: add recipe to user's submission and votes list
     req.user.recipes.push(recipe._id);
     req.user.votes.push(recipe._id);
     req.user.save((err) => {
@@ -83,7 +86,7 @@ const update = (req, res) => {
   ingArr.forEach(ingIndex => {
     if (req.body[ingIndex]) ingredients.push(req.body[ingIndex]);
   });
-  console.log(ingredients);
+  // update the recipe with the fields in the edit form
   Recipe.findByIdAndUpdate(
     req.params.id,
     {
@@ -101,7 +104,9 @@ const update = (req, res) => {
 
 const deleteRecipe = (req, res) => {
   Recipe.findByIdAndDelete(req.params.id, (err) => {
+    // after deleting recipe from DB, delete recipe from user's submissions
     req.user.recipes.pull(req.params.id);
+    // TODO: delete recipe from vote list of everyone who voted for the recipe
     req.user.save((err) => {
       res.redirect("/recipes");
     });

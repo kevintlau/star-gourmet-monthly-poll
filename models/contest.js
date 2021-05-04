@@ -7,7 +7,9 @@ const contestSchema = new Schema(
     theme: String,
     startDate: Date,
     endDate: Date,
+    // recipes entered into the contest
     recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
+    // each contest should have a limited list of ingredients
     ingredients: Object,
   },
   {

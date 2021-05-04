@@ -1,48 +1,34 @@
-/*  Ingredients in Schema form
-const ingredients = [
-    { name: "Fish", type: "meat" },
-    { name: "Beef", type: "meat" },
-    { name: "Pork", type: "meat" },
-    { name: "Chicken", type: "meat" },
-    { name: "Herbs", type: "seasoning" },
-    { name: "Garlic", type: "seasoning" },
-    { name: "Peppercorn", type: "seasoning" },
-    { name: "Sugar", type: "seasoning" },
-    { name: "Broccoli", type: "vegetable" },
-    { name: "Carrot", type: "vegetable" },
-    { name: "Onion", type: "vegetable" },
-    { name: "Celery", type: "vegetable" },
-    { name: "Tomato", type: "vegetable" },
-    { name: "Apple", type: "fruit" },
-    { name: "Orange", type: "fruit" },
-    { name: "Peach", type: "fruit" },
-    { name: "Berries", type: "fruit" },
-    { name: "Potato", type: "cereal" },
-    { name: "Corn", type: "cereal" },
-    { name: "Flour", type: "cereal" },
-    { name: "Beans", type: "cereal" },
-    { name: "Rice", type: "cereal" },
-    { name: "Milk", type: "dairy" },
-    { name: "Cheese", type: "dairy" },
-    { name: "Butter", type: "dairy" },
-    { name: "Yogurt", type: "dairy" },
-];
-*/
+// seed file to generate new contests
 
 const ingredients = {
-  Meat: ["Beef", "Chicken", "Fish", "Pork"],
-  Seasoning: ["Herbs", "Garlic", "Peppercorn", "Sugar"],
-  Vegetables: ["Broccoli", "Carrot", "Celery", "Onion", "Tomato"],
-  Fruits: ["Apple", "Berries", "Orange", "Peach"],
-  Cereals: ["Beans", "Corn", "Flour", "Potato", "Rice"],
+  Meat: ["Beef", "Chicken", "Eggs", "Fish", "Pork"],
+  Seasoning: [
+    "Herbs", "Garlic", "Oil", "Peppercorn", 
+    "Salt", "Sugar", "Vinegar"
+  ],
+  Vegetables: [
+    "Broccoli", "Chili Pepper", "Carrot", "Celery", 
+    "Lettuce", "Onion", "Pumpkin", "Tomato"
+  ],
+  Fruits: ["Apple", "Banana", "Berries", "Lemon", "Orange", "Peach"],
+  Cereals: ["Beans", "Bread", "Corn", "Flour", "Pasta", "Potato", "Rice"],
   Dairy: ["Butter", "Cheese", "Milk", "Yogurt"],
 };
 
-const currentContest = {
+const aprilContest = {
   name: "April 2021",
   theme: "American",
   startDate: "2021-04-01T00:00:00Z",
   endDate: "2021-04-30T23:59:59Z",
+  recipes: [],
+  ingredients: ingredients,
+};
+
+const mayContest = {
+  name: "May 2021",
+  theme: "American",
+  startDate: "2021-05-01T00:00:00Z",
+  endDate: "2021-05-31T23:59:59Z",
   recipes: [],
   ingredients: ingredients,
 };
@@ -66,8 +52,7 @@ db.on("connected", function () {
 });
 
 const Contest = require("../models/contest");
-const Recipe = require("../models/recipe");
 
-Contest.create(currentContest, (err, contest) => {
+Contest.create(mayContest, (err, contest) => {
   console.log("created contest: ", contest);
 });

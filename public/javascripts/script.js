@@ -18,13 +18,17 @@ let numOfPages;
 
 // ------- cached element references ------------------------------------------
 
+// spinner for loading
 const $spinnerEl = $("#spinner");
+
 const $recipesWrapperEl = $("#recipes-wrapper");
 const $pageBtnWrapperEl = $("#page-btn-wrapper");
 
 // ------- event listeners ----------------------------------------------------
 
+// listen for navigating to a different paginated section
 $pageBtnWrapperEl.on("click", ".page-link", handleChangePage);
+
 $recipesWrapperEl.on("click", ".vote-btn", handleVote);
 
 // ------- functions ----------------------------------------------------------
@@ -106,6 +110,8 @@ function calculateButtonWindow() {
   return [maxLeft, maxRight];
 }
 
+// generate a card for each recipe
+// vote button is disabled if user cannot vote for the recipe
 function generateCard(recipeObj) {
   return `
     <div class="col-md-4">
@@ -154,20 +160,24 @@ function render() {
   generatePageButtons();
 }
 
+// use the page number to re-render the results
 function handleChangePage() {
   currentPage = Number($(this).val());
   render();
 }
 
-//
 function handleVote() {
+  // disable the vote button on the front-end
   $(this).addClass("disabled");
+  // increment the score counter
   let $scoreEl = $($(this)[0].children[0]);
   let currentScore = parseInt($scoreEl.text());
   currentScore++;
   $scoreEl.text(currentScore);
+  // then send the post request to the server to log the vote in database
   let recipeId = this.dataset.id;
   $.post(`/api/recipes/${recipeId}/vote`).then(
+    // because front-end was changed already, don't need a redirect or refresh
     () => {},
     err => console.log(err)
   );

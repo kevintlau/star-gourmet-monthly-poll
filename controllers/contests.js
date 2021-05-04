@@ -1,8 +1,7 @@
-const Recipe = require("../models/recipe");
-const Account = require("../models/account");
 const Contest = require("../models/contest");
 
 const index = (req, res) => {
+  // find the current contest based on current date/time
   let now = new Date();
   let nowISO = now.toISOString();
   Contest.findOne(
@@ -11,7 +10,7 @@ const index = (req, res) => {
       startDate: { $lt: nowISO },
       endDate: { $gte: nowISO },
     },
-    // callback: render the new page with the theme populated
+    // render the home page with the current contest populated
     (err, currContest) => {
       res.render("index", {
         title: "Welcome",

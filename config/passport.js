@@ -11,22 +11,17 @@ passport.use(
       callbackURL: process.env.GOOGLE_CALLBACK,
     },
     (accessToken, refreshToken, profile, cb) => {
-      // a user has attempted a login
-      // does this user exist in our database? let's check
+      // check if user exists
       Account.findOne({ googleId: profile.id }, (err, account) => {
-        // if doesn't exist, then create them
-        // check for and handle errors
-        // errors are passed to the next function (the cb)
-        // this is called an escape hatch
         if (err) return cb(err);
         // if user exists in db, then log them in
         if (account) {
+          // if user found, then send the account with no error (null)
           return cb(null, account);
-          // first argument is any errors that we encountered
-          // in this case, it was a success, so error is "null"
         } else {
-          // user doesn't exist, create them instead
+          // if user not found, create new account instead
           const newAccount = new Account({
+            // scope: get name, email address, and Google ID
             name: profile.displayName,
             email: profile.emails[0].value,
             googleId: profile.id,
