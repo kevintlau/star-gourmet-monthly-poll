@@ -36,6 +36,7 @@ Browse the current submissions in the contest on the main page. If you're up for
 ### WIP and Future Enhancements
 
 * Delete recipe from all vote arrays after a recipe is deleted
+* Add function to allow users to retract their vote
 * Add a details modal to the contest page
 * Add a page for previous contests
 * Add an About page to introduce the app
