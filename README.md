@@ -17,7 +17,7 @@ A companion web application to a restaurant simulation video game that allows us
 
 Desktop functionality:
 
-![Landing Page](https://i.imgur.com/e4eBVOy.png)
+![Landing Page](https://imgur.com/yk5Qv69.png)
 
 ![My Recipes Page](https://i.imgur.com/pHcQt2X.png)
 
