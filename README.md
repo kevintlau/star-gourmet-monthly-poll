@@ -7,6 +7,7 @@ A companion web application to a restaurant simulation video game that allows us
 * HTML5
 * CSS3
 * JavaScript
+* jQuery
 * Node
 * Express
 * MongoDB (w/ Mongoose)

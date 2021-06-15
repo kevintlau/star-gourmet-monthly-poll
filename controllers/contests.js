@@ -7,8 +7,8 @@ const index = (req, res) => {
   Contest.findOne(
     // search criteria: contest starts before now and ends after now
     {
-      startDate: { $lt: nowISO },
-      endDate: { $gte: nowISO },
+      // startDate: { $lt: nowISO },
+      // endDate: { $gte: nowISO },
     },
     // render the home page with the current contest populated
     (err, currContest) => {
